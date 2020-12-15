@@ -52,6 +52,7 @@ const Permissions = ({ route, navigation }) => {
   console.log(`default address created ${address}`);
 
   const onSubmit = (e) => {
+   
     e.preventDefault();
     if (hydroId === "") {
       Toast.show({
@@ -64,9 +65,17 @@ const Permissions = ({ route, navigation }) => {
       createSignedMessage(timestamp, address);
       navigation.navigate("claim", { hydroId, signature, address, timestamp });
     }
+storeData();
   };
-
- const retrieveData = async () => {
+  const storeData = async () => {
+      try {
+        await AsyncStorage.setItem('@hydro_id_key', hydroId)
+        console.log('addresssss------>', hydroId)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  const retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('@private_key');
       if (value !== null) {
@@ -76,6 +85,15 @@ const Permissions = ({ route, navigation }) => {
 
     }
   }
+
+  // const storeData = async () => {
+  //   try {
+  //     await AsyncStorage.setItem('@wallet_address_key', address)
+  //     console.log('addresssss------>', address)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
 
   return (

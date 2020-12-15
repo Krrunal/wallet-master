@@ -67,8 +67,6 @@ const Contact = ({ navigation }) => {
               <Paragraph>{hydroAddress}</Paragraph>
             </TouchableOpacity>
           </View>
-
-
           <View style={styles.box}>
             <Lead>BTC</Lead>
             <TouchableOpacity

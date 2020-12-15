@@ -23,12 +23,25 @@ const Register = ({ navigation }) => {
     defaultWalletData,
     walletError,
   } = snowflakeContext;
+  const [address, setAddress] = useState('');
+  const storeData = async () => {
 
-  const createWallet = (e) => {
+
+  }
+
+  const createWallet =  (e) => {
     createDefaultAddress()
-      .then((walletData) => {
+      .then(async(walletData) => {
         let address = walletData[0].address;
         setSpinner(false);
+
+        try {
+          await AsyncStorage.setItem('@wallet_address_key', address)
+
+        } catch (error) {
+          console.log(error)
+        }
+        console.log('addresssss------>', address)
         navigation.navigate("mnemonic", { address });
       })
       .catch((err) => {
@@ -49,6 +62,8 @@ const Register = ({ navigation }) => {
     e.preventDefault();
     navigation.navigate("mnemonic");
   }
+
+
 
   return (
     <BgView>

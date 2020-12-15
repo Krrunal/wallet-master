@@ -58,7 +58,7 @@ const Settings = ({ navigation, route }) => {
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
 
-  
+
   const onAddPress = async () => {
     navigation.navigate('addCustomToken')
   }
@@ -69,7 +69,7 @@ const Settings = ({ navigation, route }) => {
   return (
     <SecondaryBgView>
       <SecondaryHeader.Back title="Settings" onBackPress={navigation.goBack} />
-      
+
       <SettingsCard
         hydroAddress={address}
         onIdPress={CopyToClipboard}
@@ -79,20 +79,18 @@ const Settings = ({ navigation, route }) => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{  
+        contentContainerStyle={{
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "row",
           paddingBottom: width * 0.05
-        }}
-      >
+        }}>
         <SettingsItemCard value="Export keys" />
         <SettingsItemCard value="Advanced" />
-
         <SettingsItemCard value="Change Password" />
         <SettingsItemCard value="Dark Mode" onPress={toggleTheme} />
-        <SettingsItemCard value="Contact Card" onPress={() => navigation.navigate('contact')}/>
+        <SettingsItemCard value="Contact Card" onPress={() => navigation.navigate('contact')} />
         <SettingsItemCard value="Rate Us" />
         <SettingsItemCard value="Lending" onPress={() => navigation.navigate('comingSoon')} />
         <SettingsItemCard value="Stacking" onPress={() => navigation.navigate('comingSoon')} />

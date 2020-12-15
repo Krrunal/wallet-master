@@ -20,12 +20,10 @@ import Button from "../../components/Button";
 import LottieView from 'lottie-react-native';
 
 const { height, width } = Dimensions.get('window');
-
 const Home = ({ navigation, route }) => {
   const snowflakeContext = useContext(SnowflakeContext);
   const { address, hydroId } = route.params;
-  console.log(address)
-
+  console.log(address);
   const TxFeed = [
     {
       image: require("../../assets/images/emma.png"),
@@ -145,7 +143,7 @@ const Home = ({ navigation, route }) => {
 
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: width * 0.05 }}>
-        <View style={{ justifyContent:'center', alignItems:'center'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <WalletCard
             balance="0"
             address={address}
@@ -195,7 +193,7 @@ const Home = ({ navigation, route }) => {
         )} */}
 
 
-        <Lead style={{paddingVertical: width * 0.05 }}>Tx Feed</Lead>
+        <Lead style={{ paddingVertical: width * 0.05 }}>Tx Feed</Lead>
         {/* <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <LottieView
