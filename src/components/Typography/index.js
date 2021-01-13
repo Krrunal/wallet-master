@@ -8,8 +8,8 @@ export const Paragraph = ({ children, style }) => {
   return (
     <Text
       style={{
-        fontSize: 16,
-        lineHeight: 20,
+        fontSize: 18,
+        lineHeight: 25,
         fontFamily: "Rubik-Regular",
         color: theme.basic,
         ...style,

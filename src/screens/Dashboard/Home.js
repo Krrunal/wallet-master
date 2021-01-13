@@ -18,11 +18,14 @@ import { TxFeedCard, WalletCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 import LottieView from 'lottie-react-native';
+import w3s from '../../libs/Web3Service';
+import AsyncStorage from "@react-native-community/async-storage";
+import { ethers, } from 'ethers';
 
 const { height, width } = Dimensions.get('window');
 const Home = ({ navigation, route }) => {
   const snowflakeContext = useContext(SnowflakeContext);
-  const { address, hydroId } = route.params;
+  const { address, hydroId, key } = route.params;
   console.log(address);
   const TxFeed = [
     {

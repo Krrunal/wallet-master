@@ -10,9 +10,9 @@ const Button = ({ onPress, text, style, ...props }) => {
       style={{
         backgroundColor: theme.primary,
         width: width - width * 0.10,
-        marginRight: 5,
-        padding: 10,
+        padding: 12,
         borderRadius: 2,
+        marginVertical: 25,
         ...style,
       }}
       onPress={onPress}
@@ -20,7 +20,9 @@ const Button = ({ onPress, text, style, ...props }) => {
     >
       <Text
         style={{
-          fontSize: 18,
+          fontWeight: "bold",
+          fontSize: 19,
+          letterSpacing: 0.5,
           lineHeight: 26,
           fontFamily: "Rubik-Regular",
           color: theme.white,
@@ -32,38 +34,6 @@ const Button = ({ onPress, text, style, ...props }) => {
     </TouchableOpacity>
   );
 };
-
-const TwoButton = ({ onPress, text, style, ...props }) => {
-  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
-  const theme = isLightTheme ? lightTheme : darkTheme;
-  return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: theme.primary,
-        width: width - width * 0.6,
-        marginRight: 5,
-        padding: 10,
-        borderRadius: 2,
-        ...style,
-      }}
-      onPress={onPress}
-      {...props}
-    >
-      <Text
-        style={{
-          fontSize: 18,
-          lineHeight: 26,
-          fontFamily: "Rubik-Regular",
-          color: theme.white,
-          textAlign: "center",
-        }}
-      >
-        {text}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
 
 const WhiteButton = ({ onPress, text, style, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);

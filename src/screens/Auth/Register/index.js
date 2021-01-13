@@ -33,16 +33,17 @@ const Register = ({ navigation }) => {
     createDefaultAddress()
       .then(async(walletData) => {
         let address = walletData[0].address;
+        let key = walletData[0].privateKey;
+        console.log('@privateKey =>', key)
+        console.log('@walletAddress =>', address)
         setSpinner(false);
-
         try {
-          await AsyncStorage.setItem('@wallet_address_key', address)
-
+          await AsyncStorage.setItem('@privateKey', key);
+          await AsyncStorage.setItem('@walletAddress', address);
         } catch (error) {
           console.log(error)
         }
-        console.log('addresssss------>', address)
-        navigation.navigate("mnemonic", { address });
+        navigation.navigate("permissions", { address, key });
       })
       .catch((err) => {
         setSpinner(false);
@@ -71,7 +72,10 @@ const Register = ({ navigation }) => {
 
         <Spinner visible={spinner} small={'small'} color={theme.primary} />
 
+        <View style={styles.top}>
         <Image style={styles.logo} source={require("../../../assets/images/wallet.png")} />
+        </View>
+        
         <Paragraph style={styles.paragraph}>
           Create Default Wallet which would be used to create an ethereum
           Identity Number
@@ -90,13 +94,19 @@ const Register = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+  },
+
+  top: {
+    justifyContent:'center',
+    alignItems:'center',
+    height: height * 60/100,
+    paddingHorizontal: 25
   },
 
   logo: {
     resizeMode: 'contain',
-    width: width * 0.85,
-    height: '60%'
+    width: '100%', 
+    height: '100%', 
   },
 
   paragraph: {
@@ -104,13 +114,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: width * 0.05
   },
 
+  
   buttonContainer: {
+    position:'absolute', 
+    width: width,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: width * 0.06,
-    width: width
   },
+
+
 
   mnemonic: {
     marginVertical: 15

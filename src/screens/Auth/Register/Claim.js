@@ -27,11 +27,15 @@ const Claim = ({ route, navigation }) => {
 
   return (
     <BgView>
+      <View style={styles.container}>
+      
       <Header.Back onBackPress={navigation.goBack} title="Claim Identity" containerStyle={styles.header} />
 
-      <View style={styles.container}>
-
+      <View style={styles.top}>
         <Image style={styles.collect} source={require("../../../assets/images/collect.png")} />
+        </View>
+
+        
 
         <Paragraph style={styles.paragraph}>
           Almost there, just click below to claim your new on-chain Snowflake
@@ -40,7 +44,6 @@ const Claim = ({ route, navigation }) => {
 
         <View style={styles.buttonContainer}>
           <Button
-            style={{ marginTop: "10%" }}
             text="Claim Identity"
             onPress={onSubmit}
           />
@@ -54,20 +57,29 @@ const Claim = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
   },
 
   header: {
-    marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+    //marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
     paddingTop: 0,
-    height: 50
+    height: 50,
+  },
+
+  top: {
+    justifyContent:'center',
+    alignItems:'center',
+    height: height * 60/100,
+    paddingHorizontal: 25
   },
 
   collect: {
     resizeMode: 'contain',
-    width: width * 0.8,
-    height: width * 0.9
+    width: '100%', 
+    height: '100%', 
   },
+
+  
 
   paragraph: {
     textAlign: "center",
@@ -75,11 +87,11 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
+    position:'absolute',
+    width: width,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: width * 0.1,
-    width: width,
   }
 })
 

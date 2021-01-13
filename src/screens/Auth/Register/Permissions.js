@@ -65,8 +65,9 @@ const Permissions = ({ route, navigation }) => {
       createSignedMessage(timestamp, address);
       navigation.navigate("claim", { hydroId, signature, address, timestamp });
     }
-storeData();
+    storeData();
   };
+
   const storeData = async () => {
       try {
         await AsyncStorage.setItem('@hydro_id_key', hydroId)
@@ -75,9 +76,10 @@ storeData();
         console.log(error)
       }
     }
+
   const retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem('@private_key');
+      const value = await AsyncStorage.getItem('@privateKey');  
       if (value !== null) {
         console.log('p----', value)
       }
@@ -86,19 +88,13 @@ storeData();
     }
   }
 
-  // const storeData = async () => {
-  //   try {
-  //     await AsyncStorage.setItem('@wallet_address_key', address)
-  //     console.log('addresssss------>', address)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  
 
 
   return (
 
-    <BgView style={styles.container}>
+    <BgView>
+      <View style={styles.container}>
       <Header.Back onBackPress={navigation.goBack} title="Permission" containerStyle={styles.header} />
 
       <View>
@@ -114,7 +110,6 @@ storeData();
               placeholder="Hydro Id"
               onChangeText={handleChange("hydroId")}
             />
-
           </View>
 
 
@@ -130,8 +125,8 @@ storeData();
         </KeyboardAwareScrollView>
       </View>
 
-      <Toast ref={(ref) => Toast.setRef(ref)} />
-
+      <Toast ref={(ref) => Toast.setRef(ref)}/>
+      </View>
     </BgView>
   );
 };
@@ -139,7 +134,7 @@ storeData();
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
   },
 
@@ -155,7 +150,7 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
-    height: height - StatusBar.currentHeight - 50,
+    height: height,
     alignItems: 'center',
   },
 
@@ -165,11 +160,11 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
+    position:'absolute',
+    width: width,
+    bottom: 50, 
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: width * 0.1,
-    width: width
   }
 })
 

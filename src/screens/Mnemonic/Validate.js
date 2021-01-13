@@ -136,7 +136,7 @@ export default class Validate extends React.Component {
       }, 500)
     }
   }
-
+ 
   generateENCKeys = () => {
     const { connection, password } = this.state;
     if (!connection) {
@@ -173,11 +173,6 @@ export default class Validate extends React.Component {
   }
 
   storeData = async () => {
-    try {
-      await AsyncStorage.setItem('@private_key', this.state.privateKey)
-    } catch (error) {
-      console.log(error)
-    }
     try {
       await AsyncStorage.setItem('@encrypted_Key', this.state.encKeyFinal)
       setTimeout(() => {
