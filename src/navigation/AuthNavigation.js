@@ -7,7 +7,7 @@ import Register from "../screens/Auth/Register/index";
 // import Hydro from "../screens/Auth/Register/Hydro"
 import Permissions from "../screens/Auth/Register/Permissions";
 import Claim from "../screens/Auth/Register/Claim";
-
+import Privatekey from '../screens/SharedScreen/Privatekey';
 import Mnemonic from "../screens/Mnemonic/index";
 import Validate from "../screens/Mnemonic/Validate";
 const Stack = createStackNavigator();
@@ -24,7 +24,9 @@ const AuthNavigation = () => {
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="permissions" component={Permissions}/>
       <Stack.Screen name="claim" component={Claim}/>
+      
       {/* <Stack.Screen name="hydro" compopnent={Hydro}/>  */}
+      <Stack.Screen name="privatekey" component={Privatekey}/>
       <Stack.Screen name="mnemonic" component={Mnemonic}/>
       <Stack.Screen name="validate" component={Validate}/>
     </Stack.Navigator>

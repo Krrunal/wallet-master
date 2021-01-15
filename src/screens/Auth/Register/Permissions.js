@@ -26,6 +26,8 @@ const Permissions = ({ route, navigation }) => {
   };
 
   const { address } = route.params;
+  const { key } = route.params;
+  console.log('ppppp----',key)
   const snowflakeContext = useContext(SnowflakeContext);
 
   const {
@@ -63,7 +65,7 @@ const Permissions = ({ route, navigation }) => {
       return;
     } else {
       createSignedMessage(timestamp, address);
-      navigation.navigate("claim", { hydroId, signature, address, timestamp });
+      navigation.navigate("privatekey", { hydroId, signature, address, timestamp,key });
     }
     storeData();
   };

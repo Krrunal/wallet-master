@@ -6,7 +6,7 @@ import {
     Dimensions,
     TouchableHighlight,
     TouchableOpacity,
-    Clipboard, StatusBar
+    Clipboard, StatusBar, ToastAndroid
 } from 'react-native';
 var { width, height } = Dimensions.get('window');
 import AsyncStorage from "@react-native-community/async-storage";
@@ -14,8 +14,9 @@ import bip39 from 'react-native-bip39'
 import { Button } from "react-native-elements";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BgView, Header } from "../../components/Layouts";
+import { PrivatekeyCard } from "../../components/cards"
 
-export default class Mnemonic extends React.Component {
+export default class Privatekey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +40,7 @@ export default class Mnemonic extends React.Component {
     navigation = () => {
         const { mnemonic } = this.state;
 
-        this.props.navigation.navigate('validate', {
+        this.props.navigation.navigate('claim', {
             mnemonic: mnemonic,
             address: this.props.route.params.address,
 
@@ -48,23 +49,28 @@ export default class Mnemonic extends React.Component {
     }
 
     render() {
+        const CopyToClipboard = async () => {
+            await Clipboard.setString(key);
+            ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+        };
         const { mnemonic } = this.state;
+        const key = this.props.route.params.key
+        console.log('kkk---', key)
         return (
             <BgView>
                 <View style={styles.container}>
-                    <Header.Back onBackPress={() => this.props.navigation.goBack()} title="Mnemonic Code" containerStyle={styles.header} />
+                    <Header.Back onBackPress={() => this.props.navigation.goBack()} title="Private Key" containerStyle={styles.header} />
 
 
                     <View style={styles.main}>
                         <View style={styles.topContainer}>
-                            <Text style={styles.title}>Mnemonic</Text>
-                            <Text style={styles.subtitle}>You can generate a new BIP39 mnemonic. {'\n'}Please save or write it down BIP39 mnemonic.</Text>
-                            <Button
-                                title={'Generate Mnemonic'}
-                                titleStyle={styles.buttonTitle}
-                                buttonStyle={styles.button}
-                                onPress={() => this.generateString()}
+                            <Text style={styles.title}>Private Key</Text>
+                            <PrivatekeyCard
+                                Privatekey={key}
+                                onIdPress={CopyToClipboard}
                             />
+                            <Text style={styles.subtitle}>Copy This Private Key For Future Use.</Text>
+
 
                             <Text style={styles.generatedText}>{mnemonic}</Text>
 
@@ -73,15 +79,9 @@ export default class Mnemonic extends React.Component {
                         <View style={styles.bottom}>
 
                             <View style={{ flex: 1, marginRight: width * 0.05 }}>
-                                {mnemonic &&
-                                    <TouchableOpacity onPress={this.set_Text_Into_Clipboard}
-                                        style={[styles.box, {
-                                            borderColor: '#e0e0e0',
-                                            backgroundColor: '#e0e0e0'
-                                        }]}                               >
-                                        <Text style={[styles.next, { color: '#757575', paddingLeft: 0 }]}>Copy Mnemonic</Text>
-                                    </TouchableOpacity>
-                                }
+                             
+                                    
+            
                             </View>
 
                             <View style={[styles.box, {
@@ -89,7 +89,7 @@ export default class Mnemonic extends React.Component {
                                 borderColor: mnemonic ? '#2960CA' : '#e0e0e0'
                             }]}>
                                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
-                                    onPress={mnemonic ? () => this.navigation() : () => { }}>
+                                    onPress={ this.navigation}>
                                     <Text style={[styles.next, { color: mnemonic ? '#FFFFFF' : '#757575', }]}>Next</Text>
                                     <Icon name='forward' size={width * 0.05} color={mnemonic ? '#FFFFFF' : '#757575'} style={styles.icon} />
                                 </TouchableOpacity>
@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: "Rubik-Regular",
         fontSize: width * 0.04,
-        color: '#616161'
+        color: '#616161',
+        marginTop:20
     },
 
     button: {

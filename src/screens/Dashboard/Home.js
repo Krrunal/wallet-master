@@ -27,6 +27,8 @@ const Home = ({ navigation, route }) => {
   const snowflakeContext = useContext(SnowflakeContext);
   const { address, hydroId, key } = route.params;
   console.log(address);
+  console.log(key);
+  
   const TxFeed = [
     {
       image: require("../../assets/images/emma.png"),
@@ -124,7 +126,7 @@ const Home = ({ navigation, route }) => {
 
             <TouchableOpacity
               style={{ paddingLeft: width * 0.02, paddingRight: '1%' }}
-              onPress={() => navigation.navigate("settings", { address })}
+              onPress={() => navigation.navigate("settings", { address,key})}
             >
               <Icon name="cog" color={theme.basic} size={20} />
             </TouchableOpacity>

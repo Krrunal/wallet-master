@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Image, Clipboard, ToastAndroid, AsyncStorage, Dimensions, Platform, StatusBar, StyleSheet, ScrollView } from "react-native";
+import { View, Image, Clipboard, ToastAndroid, Dimensions, Platform, StatusBar, StyleSheet, ScrollView, Text } from "react-native";
 import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { ThemeContext } from "../../hooks/useTheme";
 import { Paragraph } from "../../components/Typography";
@@ -7,6 +7,7 @@ import { SettingsCard, SettingsItemCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 import { add } from "lodash";
+import AsyncStorage from "@react-native-community/async-storage";
 const { height, width } = Dimensions.get('window');
 
 const Settings = ({ navigation, route }) => {
@@ -17,6 +18,7 @@ const Settings = ({ navigation, route }) => {
   console.log(hydroAddress)
 
   const [customToken, setCustomToken] = useState(null)
+
   //This function generates a random number used for the generation of qr code
   //   function generateRandomString(length) {
   //     var result = "";
@@ -40,6 +42,7 @@ const Settings = ({ navigation, route }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       getCustomToken()
+
     });
 
     return unsubscribe;
@@ -47,6 +50,7 @@ const Settings = ({ navigation, route }) => {
 
   const getCustomToken = async () => {
     let customToken = await AsyncStorage.getItem("customToken")
+
     if (customToken) {
       customToken = JSON.parse(customToken)
       setCustomToken(customToken)
@@ -58,14 +62,25 @@ const Settings = ({ navigation, route }) => {
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
 
+  // const retrieveData = async () => {
+  //   try {
+  //     let value = await AsyncStorage.getItem('@privateKey');  
+  //     if (value !== null) {
+  //       console.log('Privatekey----', value)
+  //       value = JSON.parse(value)
+  //       setValue(value)
+  //     }
+  //   } catch (error) {
 
+  //   }
+  // }
   const onAddPress = async () => {
     navigation.navigate('addCustomToken')
   }
   const { toggleTheme } = useContext(ThemeContext);
 
   const { address } = route.params
-
+  //const { key } = route.params
   return (
     <SecondaryBgView>
       <SecondaryHeader.Back title="Settings" onBackPress={navigation.goBack} />
@@ -75,6 +90,7 @@ const Settings = ({ navigation, route }) => {
         onIdPress={CopyToClipboard}
         onAddPress={onAddPress}
         customToken={customToken}
+       
       />
 
       <ScrollView

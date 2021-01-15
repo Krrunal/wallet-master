@@ -142,6 +142,7 @@ export const NotificationCard = ({
 
 export const SettingsCard = ({
   hydroAddress,
+
   onWalletPress,
   onIdPress,
   onAddPress,
@@ -232,6 +233,7 @@ export const SettingsCard = ({
           <Paragraph>{hydroAddress}</Paragraph>
         </TouchableOpacity>
       </View>
+
       {customToken && Object.keys(customToken).length > 0 &&
         <View style={{ marginTop: 10 }}>
           <Lead>Custom Token</Lead>
@@ -249,6 +251,50 @@ export const SettingsCard = ({
     </View>
   );
 };
+
+
+
+
+
+export const PrivatekeyCard = ({
+  Privatekey,
+  onIdPress,
+  ...props
+}) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View
+      style={{
+        backgroundColor: theme.secondaryCard,
+        // paddingVertical: width * 0.05,
+        width: width - width * 0.1,
+        //marginTop: width * 0.05,
+        //paddingHorizontal: width * 0.05,
+        borderRadius: 10,
+        //  marginBottom: width * 0.05,
+      }}
+      {...props}
+    >
+
+      <View style={{}}>
+        <TouchableOpacity
+          onPress={onIdPress}
+          style={{
+            padding: 5,
+            backgroundColor: theme.secondary,
+            borderRadius: 5,
+            marginTop: 10
+          }}
+        >
+          <Paragraph>{Privatekey}</Paragraph>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+
 export const DepositCard = ({
   hydroAddress,
   onWalletPress,

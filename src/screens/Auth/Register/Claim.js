@@ -8,8 +8,8 @@ import w3s from "../../../libs/Web3Service";
 const { height, width } = Dimensions.get('window');
 
 const Claim = ({ route, navigation }) => {
-  const { hydroId, signature, address, timestamp } = route.params;
-
+  const { hydroId, signature, address, timestamp,key } = route.params;
+console.log('pp---',key)
   const snowflakeContext = useContext(SnowflakeContext);
 
   const { createIdentity, ein } = snowflakeContext;
@@ -21,7 +21,7 @@ const Claim = ({ route, navigation }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     createIdentity(timestamp, signature, hydroId, address);
-    navigation.navigate("app", { screen: "home", params: { address, hydroId } });
+    navigation.navigate("app", { screen: "home", params: { address, hydroId ,key} });
     console.log(address);
   };
 
